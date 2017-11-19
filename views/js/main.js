@@ -294,7 +294,7 @@ function generator(adj, noun) {
   var name = "The " + adjectives[randomAdjective]/*.capitalize()*/ + " " + nouns[randomNoun]/*.capitalize()*/;
   return name;
 }
-
+// Refactored the following functions -> removed variables and inlined calculations
 // Chooses random adjective and random noun
 function randomName() {
   return generator(adjectives[parseInt(Math.random() * adjectives.length)], nouns[parseInt(Math.random() * nouns.length)]);
@@ -437,7 +437,7 @@ function determineDx (elem, size) {
 function changePizzaSizes(size) {
 //all pizza containers are the same size so no need to iterate over all
     //source: https://stackoverflow.com/questions/21436550/javascript-how-to-get-only-one-element-by-class-name/21436552
-    var firstPizza = document.getElementsByClassName(".randomPizzaContainer")[0];
+    var firstPizza = document.getElementsByClassName("randomPizzaContainer")[0];
     var dx = determineDx(firstPizza, size);
     var pizzaWidth = firstPizza.offsetWidth + dx + 'px';
     for (var i = 0, _docLength = document.querySelectorAll(".randomPizzaContainer").length; i < _docLength; i++) {
@@ -484,22 +484,6 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
     sum = sum + times[i].duration;
   }
   console.log("Average scripting time to generate last 10 frames: " + sum / 10 + "ms");
-}
-
-
-// Fixing Scroll Events with debouncing
-// Source: https://github.com/google/WebFundamentals/issues/2227
-function onScroll (evt) {
-
-    // Store the scroll value for laterz.
-    lastScrollY = window.scrollY;
-
-    // Prevent multiple rAF callbacks.
-    if (scheduledAsync)
-        return;
-
-    scheduledAsync = true;
-    setTimeout(readAndUpdatePage, 66);
 }
 
 
