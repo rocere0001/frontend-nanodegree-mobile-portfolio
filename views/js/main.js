@@ -424,9 +424,9 @@ function sizeSwitcher (size) {
 
 // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
 function determineDx (elem, size) {
-    var oldWidth = elem.offsetWidth;
-    var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
-    var oldSize = oldWidth / windowWidth;
+    var curWidth = elem.offsetWidth;
+    var windowWidth = document.getElementById("randomPizzas").offsetWidth;
+    var oldSize = curWidth / windowWidth;
     // Changes the slider value to a percent width
     var newSize = sizeSwitcher(size);
     var dx = (newSize - oldSize) * windowWidth;
@@ -439,7 +439,7 @@ function changePizzaSizes(size) {
     //source: https://stackoverflow.com/questions/21436550/javascript-how-to-get-only-one-element-by-class-name/21436552
     var firstPizza = document.getElementsByClassName("randomPizzaContainer")[0];
     var dx = determineDx(firstPizza, size);
-    var pizzaWidth = firstPizza.offsetWidth + dx + 'px';
+    var pizzaWidth = (firstPizza.offsetWidth + dx) + 'px';
     for (var i = 0, _docLength = document.querySelectorAll(".randomPizzaContainer").length; i < _docLength; i++) {
         document.querySelectorAll(".randomPizzaContainer")[i].style.width = pizzaWidth;
     }
