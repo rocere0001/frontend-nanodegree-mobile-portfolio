@@ -392,7 +392,7 @@ var pizzaElementGenerator = function(i) {
   return pizzaContainer;
 };
 
-var _sliderLabel = document.querySelector("#pizzaSize").innerHTML;
+var _sliderLabel = document.getElementById("pizzaSize").innerHTML;
 function changeSliderLabel(size) {
     switch(size) {
         case "1":
