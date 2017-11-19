@@ -449,8 +449,8 @@ function changePizzaSizes(size) {
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
   // Changes the value for the size of the pizza above the slider
-  changeSliderLabel(size);
   changePizzaSizes(size);
+  changeSliderLabel(size);
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
