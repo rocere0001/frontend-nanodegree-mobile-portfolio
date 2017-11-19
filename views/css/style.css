@@ -43,9 +43,12 @@ form {
 .randomPizzaContainer:after {
   content: "";
   display: table;
-  clear:both;
+  clear: both;
 }
 
  .container {
   background-color: rgba(240, 60, 60, 0.8);
+}
+.randomPizzaName{
+  text-transform: capitalize;
 }
