@@ -533,6 +533,7 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
+  ticking = false;
   frame++;
   window.performance.mark("mark_start_frame");
     /**
@@ -590,7 +591,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = screen.availWidth / s;
   var rows = screen.availHeight / s;
   var totalPizzas = Math.round(rows * cols);
-  for (var i = 0, elem; i < totalPizzas; i++) {
+  for (var i = 0, elem, movePizzas=document.getElementById("movingPizzas1"); i < totalPizzas; i++) {
     elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
@@ -601,7 +602,7 @@ document.addEventListener('DOMContentLoaded', function() {
       /**
        * changed query Selector -> getElementsBy
        */
-    document.getElementById("movingPizzas1").appendChild(elem);
+    movePizzas.appendChild(elem);
   }
   updatePositions();
 });
