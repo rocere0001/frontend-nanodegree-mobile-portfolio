@@ -20,6 +20,5 @@ https://css-tricks.com/gulp-for-beginners/
 Refactored:
 * function changePizzaSizes(size) -> Removed all function declarations
 * Solved the capitalization of pizza names with CSS instead of JavaScript
-
-
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
+* Changed number of moving pizzas to availHeight and width - https://developer.mozilla.org/en-US/docs/Web/API/Screen
+* multiple small improvements 
