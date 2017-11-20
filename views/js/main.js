@@ -512,6 +512,8 @@ function updatePositions() {
     logAverageFrame(timesToUpdatePosition);
   }
 }
+
+
 // https://www.html5rocks.com/en/tutorials/speed/animations/
 var latestKnownScrollY = 0,
     ticking = false;

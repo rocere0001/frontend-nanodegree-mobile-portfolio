@@ -20,5 +20,6 @@ https://css-tricks.com/gulp-for-beginners/
 Refactored:
 * function changePizzaSizes(size) -> Removed all function declarations
 * Solved the capitalization of pizza names with CSS instead of JavaScript
-* Changed number of moving pizzas to availHeight and width - https://developer.mozilla.org/en-US/docs/Web/API/Screen
+* Changed number of moving pizzas to availHeight and width - (Source) https://developer.mozilla.org/en-US/docs/Web/API/Screen
+* Increased scroll speed with the debouncing of scroll events - (Source) https://www.html5rocks.com/en/tutorials/speed/animations/
 * multiple small improvements 
