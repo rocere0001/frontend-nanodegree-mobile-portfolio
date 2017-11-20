@@ -512,6 +512,21 @@ function updatePositions() {
     logAverageFrame(timesToUpdatePosition);
   }
 }
+// https://www.html5rocks.com/en/tutorials/speed/animations/
+var latestKnownScrollY = 0,
+    ticking = false;
+
+function onScroll() {
+    latestKnownScrollY = window.scrollY;
+    requestTick();
+}
+
+function requestTick() {
+    if(!ticking) {
+        requestAnimationFrame(update);
+    }
+    ticking = true;
+}
 
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
