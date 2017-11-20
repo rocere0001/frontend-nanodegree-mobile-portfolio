@@ -577,7 +577,7 @@ function requestTick() {
 }
 
 // runs updatePositions on scroll
-window.addEventListener('scroll', onScroll);
+window.addEventListener('scroll', onScroll, false);
 
 /**
  * Generates the sliding pizzas when the page loads.
