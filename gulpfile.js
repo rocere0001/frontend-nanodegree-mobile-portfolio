@@ -1,5 +1,5 @@
 var gulp = require("gulp"), minifyHtml = require("gulp-htmlmin"), cleanCSS = require("gulp-clean-css")
-    , imgmin = require("gulp-imagemin"), uglify = require("gulp-uglify"), inline = require('gulp-inline'), errorHandler = require('gulp-error-handle');
+    , imgmin = require("gulp-imagemin"), uglify = require("gulp-uglify"), inline = require('gulp-inline');
 
 
 gulp.task("minify-html", function () {
