@@ -1,7 +1,9 @@
 # About
 This is the hand in for the Udacity Project on Page Speed Optimization.
 ## Example running version
+### Main Page
 https://rocere0001.github.io/frontend-nanodegree-mobile-portfolio/dist/index.html
+### Pizza Site
 https://rocere0001.github.io/frontend-nanodegree-mobile-portfolio/dist/views/pizza.html
 
 # How to use
@@ -16,6 +18,8 @@ https://rocere0001.github.io/frontend-nanodegree-mobile-portfolio/dist/views/piz
 ## Main Site
 Gulp Minimize Automization for:
 * html, css, js, img, optimizations for images
+* set print media for print.css file
+* 
 
 Source:
 https://github.com/alferov/awesome-gulp#minification
@@ -30,5 +34,4 @@ https://css-tricks.com/gulp-for-beginners/
 * changed querySelector & querySelectorAll to getElement(s)ByClass/Id
 * moved variable declarations out of for looop in function: updatePositions()
 * Added transform: translateZ(0) & backface-visibility: hidden to enable hardware acceleration to /views/css/style.css
-
-* multiple small improvements 
+* changed cols and rows to the available Width and Height in updatePositions()

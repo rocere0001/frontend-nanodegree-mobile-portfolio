@@ -581,7 +581,7 @@ window.addEventListener('scroll', onScroll, updatePositions);
 
 /**
  * Generates the sliding pizzas when the page loads.
- *
+ * changed cols and rows to the available Width and Height
  * Source: https://developer.mozilla.org/en-US/docs/Web/API/Screen
  */
 //
