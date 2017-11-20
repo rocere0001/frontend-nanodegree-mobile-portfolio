@@ -19,7 +19,7 @@ https://rocere0001.github.io/frontend-nanodegree-mobile-portfolio/dist/views/piz
 Gulp Minimize Automization for:
 * html, css, js, img, optimizations for images
 * set print media for print.css file
-* 
+* Used webFont Loader for Google Font
 
 Source:
 https://github.com/alferov/awesome-gulp#minification
