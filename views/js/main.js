@@ -528,6 +528,26 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 }
 
 
+/**
+ * Function to debunk the scrolling animation
+ * @type {number}
+ */
+var latestKnownScrollY = 0,
+    ticking = false;
+
+function onScroll() {
+    latestKnownScrollY = window.scrollY;
+    requestTick();
+}
+
+function requestTick() {
+    if(!ticking) {
+        requestAnimationFrame(updatePositions);
+    }
+    ticking = true;
+}
+
+
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
@@ -558,23 +578,6 @@ function updatePositions() {
     var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
     logAverageFrame(timesToUpdatePosition);
   }
-}
-
-
-// https://www.html5rocks.com/en/tutorials/speed/animations/
-var latestKnownScrollY = 0,
-    ticking = false;
-
-function onScroll() {
-    latestKnownScrollY = window.scrollY;
-    requestTick();
-}
-
-function requestTick() {
-    if(!ticking) {
-        requestAnimationFrame(updatePositions);
-    }
-    ticking = true;
 }
 
 // runs updatePositions on scroll
