@@ -8,7 +8,7 @@ gulp.task("minify-html", function () {
             base: '/',
             js: uglify,
             css: cleanCSS,
-            disabledTypes: ['svg', 'img'] // Only inline css files
+            disabledTypes: ['svg', 'img'] // Only inline css & js files
         }))
         .pipe(minifyHtml({collapseWhitespace: true}))
         .pipe(gulp.dest("dist/"))

@@ -28,11 +28,15 @@ form {
 #pizzaSize {
   font-weight: 800;
 }
-
+/*
+  Added transform: translateZ(0) & backface-visibility: hidden to enable hardware acceleration
+ */
 .mover {
   position: fixed;
   width: 256px;
   z-index: -1;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .randomPizzaContainer {
@@ -49,6 +53,9 @@ form {
  .container {
   background-color: rgba(240, 60, 60, 0.8);
 }
+ /**
+
+  */
 .randomPizzaName{
   text-transform: capitalize;
 }

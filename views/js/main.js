@@ -294,7 +294,10 @@ function generator(adj, noun) {
   var name = "The " + adjectives[randomAdjective]/*.capitalize()*/ + " " + nouns[randomNoun]/*.capitalize()*/;
   return name;
 }
-// Refactored the following functions -> removed variables and inlined calculations
+/**
+ * For the following functions I moved the variable value directly to the return statement
+ * @returns {*}
+ */
 // Chooses random adjective and random noun
 function randomName() {
   return generator(adjectives[parseInt(Math.random() * adjectives.length)], nouns[parseInt(Math.random() * nouns.length)]);
@@ -324,6 +327,11 @@ var selectRandomCrust = function() {
 var ingredientItemizer = function(string) {
   return "<li>" + string + "</li>";
 };
+
+/**
+ * For the functions above this comment I moved the variable value directly to the return statement
+ * @returns {*}
+ */
 
 // Returns a string with random pizza ingredients nested inside <li> tags
 var makeRandomPizza = function() {
@@ -392,6 +400,32 @@ var pizzaElementGenerator = function(i) {
   return pizzaContainer;
 };
 
+/**
+ * I denested all function declarations from resizePizzas:
+ * changeSliderLabel
+ * sizeSwitcher
+ * determineDx
+ * resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
+ * @param size
+ */
+
+var resizePizzas = function(size) {
+    window.performance.mark("mark_start_resize");   // User Timing API function
+    changeSliderLabel(size);
+    changePizzaSizes(size);
+
+    // User Timing API is awesome
+    window.performance.mark("mark_end_resize");
+    window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
+    var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
+    console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
+};
+
+/**
+ * Changes the value for the size of the pizza above the slider
+ * changed querySelector -> getElement
+ * @type {Element}
+ */
 var sliderLabel = document.getElementById("pizzaSize");
 function changeSliderLabel(size) {
     switch(size) {
@@ -409,6 +443,11 @@ function changeSliderLabel(size) {
     }
 }
 
+/**
+ * Changes the slider value to a percent width
+ * @param size
+ * @returns {number}
+ */
 function sizeSwitcher (size) {
     switch(size) {
         case "1":
@@ -421,8 +460,30 @@ function sizeSwitcher (size) {
             console.log("bug in sizeSwitcher");
     }
 }
+/**
+ * Changed querySelector -> getElement(s)
+ * Removed the loop that iterated over all randomPizzas and instead just saved the first one since they are always the same size
+ * source: https://stackoverflow.com/questions/21436550/javascript-how-to-get-only-one-element-by-class-name/21436552
+ * Iterates through pizza elements on the page and changes their widths
+ * @param size
+ */
+function changePizzaSizes(size) {
+    var randomPizzaContainers = document.getElementsByClassName("randomPizzaContainer");
+    var firstPizza = document.getElementsByClassName("randomPizzaContainer")[0];
+    var dx = determineDx(firstPizza, size);
+    var pizzaWidth = (firstPizza.offsetWidth + dx) + 'px';
+    for (var i = 0, _docLength = randomPizzaContainers.length; i < _docLength; i++) {
+        randomPizzaContainers.style.width = pizzaWidth;
+    }
+}
 
-// Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
+/**
+ * Changed querySelector -> getElement(s)
+ * Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
+ * @param elem
+ * @param size
+ * @returns {number}
+ */
 function determineDx (elem, size) {
     var curWidth = elem.offsetWidth;
     var windowWidth = document.getElementById("randomPizzas").offsetWidth;
@@ -433,34 +494,14 @@ function determineDx (elem, size) {
     return dx;
 }
 
-// Iterates through pizza elements on the page and changes their widths
-function changePizzaSizes(size) {
-//all pizza containers are the same size so no need to iterate over all
-    //source: https://stackoverflow.com/questions/21436550/javascript-how-to-get-only-one-element-by-class-name/21436552
-    var firstPizza = document.getElementsByClassName("randomPizzaContainer")[0];
-    var dx = determineDx(firstPizza, size);
-    var pizzaWidth = (firstPizza.offsetWidth + dx) + 'px';
-    for (var i = 0, _docLength = document.querySelectorAll(".randomPizzaContainer").length; i < _docLength; i++) {
-        document.querySelectorAll(".randomPizzaContainer")[i].style.width = pizzaWidth;
-    }
-}
 
-// resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
-var resizePizzas = function(size) {
-  window.performance.mark("mark_start_resize");   // User Timing API function
-  // Changes the value for the size of the pizza above the slider
-    changeSliderLabel(size);
-    changePizzaSizes(size);
-  // User Timing API is awesome
-  window.performance.mark("mark_end_resize");
-  window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
-  var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
-  console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
-};
 
 window.performance.mark("mark_start_generating"); // collect timing data
-
-// This for-loop actually creates and appends all of the pizzas when the page loads
+/**
+ * Changed querySelector -> getElement
+ * This for-loop actually creates and appends all of the pizzas when the page loads
+ * @type {Element}
+ */
 var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
@@ -494,12 +535,17 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
-  var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
+    /**
+     * moved scrollTop out of for loop to prevent them being created at every iteration
+     * moved declaration of phase to intialisation of for loop
+     * changed querySelector -> getElements
+     * @type {NodeList}
+     */
+  var items = document.getElementsByClassName('mover');
+  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  for (var i = 0, lenItems = items.length, phase; i < lenItems; i++) {
     // document.body.scrollTop is no longer supported in Chrome.
-    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    var phase = Math.sin((scrollTop / 1250) + (i % 5));
+    phase = Math.sin((scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -525,7 +571,7 @@ function onScroll() {
 
 function requestTick() {
     if(!ticking) {
-        requestAnimationFrame(update);
+        requestAnimationFrame(updatePositions);
     }
     ticking = true;
 }
@@ -533,23 +579,29 @@ function requestTick() {
 // runs updatePositions on scroll
 window.addEventListener('scroll', onScroll, updatePositions);
 
-// Generates the sliding pizzas when the page loads.
-// Don't create them all but rather only the ones on the viewport
-// Source: https://developer.mozilla.org/en-US/docs/Web/API/Screen
+/**
+ * Generates the sliding pizzas when the page loads.
+ *
+ * Source: https://developer.mozilla.org/en-US/docs/Web/API/Screen
+ */
+//
 document.addEventListener('DOMContentLoaded', function() {
   var s = 256;
   var cols = screen.availWidth / s;
   var rows = screen.availHeight / s;
   var totalPizzas = Math.round(rows * cols);
-  for (var i = 0; i < totalPizzas; i++) {
-    var elem = document.createElement('img');
+  for (var i = 0, elem; i < totalPizzas; i++) {
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+      /**
+       * changed query Selector -> getElementsBy
+       */
+    document.getElementById("movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
