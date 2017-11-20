@@ -473,7 +473,7 @@ function changePizzaSizes(size) {
     var dx = determineDx(firstPizza, size);
     var pizzaWidth = (firstPizza.offsetWidth + dx) + 'px';
     for (var i = 0, _docLength = randomPizzaContainers.length; i < _docLength; i++) {
-        randomPizzaContainers.style.width = pizzaWidth;
+        randomPizzaContainers[i].style.width = pizzaWidth;
     }
 }
 
